@@ -1,12 +1,36 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <input type="button" value="-" v-on:click="minus" />
+    {{ count }}
+    <input type="button" value="+" v-on:click="plus" />
   </div>
 </template>
+
+<script>
+export default {
+  name: "app",
+  components: {},
+  props: {},
+  data: function () {
+    return {};
+  },
+  computed: {
+    count() {
+      return this.$store.state.count;
+    },
+  },
+  mounted: function () {},
+  methods: {
+    minus() {
+      // storeに定義されている mutation を呼び出す
+      this.$store.commit("minus");
+    },
+    plus() {
+      this.$store.commit("plus");
+    },
+  },
+};
+</script>
 
 <style>
 #app {
@@ -30,3 +54,4 @@
   color: #42b983;
 }
 </style>
+
