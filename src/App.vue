@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations, mapState } from 'vuex'
+import { mapActions, mapGetters, mapMutations, mapState } from 'vuex'
 
 export default {
   name: "app",
@@ -92,9 +92,18 @@ export default {
     //   this.$store.commit("plus");
     // },
 
+    // actionをメソッドに紐付け
+    ...mapActions(['addAsync']),
+    // 別名も付けられる
+    ...mapActions({ add: 'addAsync'}),
+
     onClick(){
+      // mutationsを呼び出し
       // this.$store.commit('addBook', {
-      this.$store.dispatch('addAsync', {
+      // actionを呼び出し
+      // this.$store.dispatch('addAsync', {
+      // mapActionsによって紐付けされたメソッドで呼び出し
+      this.addAsync({
         book: {
           isbn: this.isbn,
           title: this.title,
