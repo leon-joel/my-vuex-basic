@@ -20,7 +20,8 @@ export default new Vuex.Store({
         title: 'Vue.js超入門',
         price: 3456
       },
-    ]
+    ],
+    name: ''
   },
   mutations: {
     // state変更用のメソッド
@@ -33,6 +34,10 @@ export default new Vuex.Store({
     // 引数も渡せる ※payloadインスタンスは以下の軽視になっていると仮定 { book: {} } 
     addBook(state, payload){
       state.books.push(payload.book)
+    },
+
+    updateName(state, name){
+      state.name = name
     }
   },
   getters: {

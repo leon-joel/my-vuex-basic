@@ -16,7 +16,7 @@
     getBooksByPrice: {{getBooksByPrice(3000)}}
     <br>
     booksCount3000: {{booksCount3000}}
-    <br>
+    <hr>
 
     <form v-on:submit.prevent="onClick">
       <label for="isbn">ISBN: </label>
@@ -34,6 +34,13 @@
       <p>{{book.price}}</p>
       <p>{{book.isbn}}</p>
     </div>
+    <hr>
+
+    <form>
+      <label for="name">氏名: </label>
+      <input type="text" id="name" v-model="name">
+    </form>
+    <p>{{name}}</p>
   </div>
 </template>
 
@@ -48,7 +55,7 @@ export default {
     return {
       isbn: '',
       title: '',
-      price: 0
+      price: 0,
     };
   },
   computed: {
@@ -61,8 +68,18 @@ export default {
     //   return this.$store.state.count;
     // },
 
-    // VUexの getters を同名の算出プロパティにmapする
-    ...mapGetters([ 'booksCount', 'getBooksByPrice', 'booksCount3000'])
+    // Vuexの getters を同名の算出プロパティにmapする
+    ...mapGetters([ 'booksCount', 'getBooksByPrice', 'booksCount3000']),
+
+    // store.state.name用のget/set
+    name: {
+      get(){
+        return this.$store.state.name
+      },
+      set(value){
+        this.$store.commit('updateName', value)
+      }
+    }
   },
   mounted: function () {},
   methods: {
