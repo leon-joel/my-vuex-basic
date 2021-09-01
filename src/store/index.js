@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-// import { ADD_BOOK } from './mutation-types'
+import { ADD_BOOK } from './mutation-types'
 
 Vue.use(Vuex)
 
@@ -33,7 +33,7 @@ export default new Vuex.Store({
       state.count++
     },
     // 引数も渡せる ※payloadインスタンスは以下のobjectになっていると仮定 { book: {} } 
-    addBook(state, payload){
+    [ADD_BOOK](state, payload){
       state.books.push(payload.book)
     },
 
@@ -61,7 +61,7 @@ export default new Vuex.Store({
   actions: {
     addAsync(context, payload){
       setTimeout(function(){
-        context.commit('addBook', payload)
+        context.commit(ADD_BOOK, payload)
       }, 5000)
     }
   },
