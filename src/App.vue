@@ -91,9 +91,10 @@ export default {
     // plus() {
     //   this.$store.commit("plus");
     // },
-    
+
     onClick(){
-      this.$store.commit('addBook', {
+      // this.$store.commit('addBook', {
+      this.$store.dispatch('addAsync', {
         book: {
           isbn: this.isbn,
           title: this.title,
