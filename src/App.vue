@@ -1,12 +1,21 @@
 <template>
   <div id="app">
     <input type="button" value="-" v-on:click="minus" />
+    <br>
     {{ count }}
+    <br>
+    {{ countNumber }}
+    <br>
     <input type="button" value="+" v-on:click="plus" />
+    <br>
+    <br>
+    {{ someOtherProp }}
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: "app",
   components: {},
@@ -15,9 +24,14 @@ export default {
     return {};
   },
   computed: {
-    count() {
-      return this.$store.state.count;
-    },
+    someOtherProp() { return 1},
+    // Vuexの count を count にマッピング （いちいちcount computedメソッドを作る必要が無くなる）
+    ...mapState(['count']),
+    // 別名でマッピング
+    ...mapState({ countNumber: 'count' }),
+    // count() {
+    //   return this.$store.state.count;
+    // },
   },
   mounted: function () {},
   methods: {
