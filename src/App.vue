@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex'
+import { mapGetters, mapMutations, mapState } from 'vuex'
 
 export default {
   name: "app",
@@ -71,7 +71,7 @@ export default {
     // Vuexの getters を同名の算出プロパティにmapする
     ...mapGetters([ 'booksCount', 'getBooksByPrice', 'booksCount3000']),
 
-    // store.state.name用のget/set
+    // store.state.name用のget/set ※これで双方向バインディングが可能に
     name: {
       get(){
         return this.$store.state.name
@@ -83,13 +83,15 @@ export default {
   },
   mounted: function () {},
   methods: {
-    minus() {
-      // storeに定義されている mutation を呼び出す
-      this.$store.commit("minus");
-    },
-    plus() {
-      this.$store.commit("plus");
-    },
+    ...mapMutations(['plus', 'minus']),
+    // minus() {
+    //   // storeに定義されている mutation を呼び出す
+    //   this.$store.commit("minus");
+    // },
+    // plus() {
+    //   this.$store.commit("plus");
+    // },
+    
     onClick(){
       this.$store.commit('addBook', {
         book: {
